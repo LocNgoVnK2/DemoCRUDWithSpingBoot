@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Users</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid text-center">
+  <h1>Welcome to User Management</h1>
+  <div class="m-2">
+    <a class="btn btn-primary" th:href="@{/users/new}" >Add new user</a>
+  </div>
+
+  <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>[[${message}]]</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div>
+
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Id</th>
+          <th>E-Mail</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th></th>
+
+        </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="user:${listUsers}">
+        <tr>
+          <th>[[${user.id}]]</th>
+          <th>[[${user.email}]]</th>
+          <th>[[${user.firstName}]]</th>
+          <th>[[${user.lastName}]]</th>
+          <th>
+            <a class="btn btn-primary" th:href="@{'/users/edit/'+${user.id}}" >Update</a>
+            <a class="btn btn-secondary" th:href="@{'/users/delete/'+${user.id}}" >Remove</a>
+          </th>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
